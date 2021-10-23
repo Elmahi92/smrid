@@ -1,13 +1,26 @@
 Package: smrid
-Title: What the Package Does (One Line, Title Case)
+Title: Ridge Regression
 Version: 0.0.0.9000
-Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+Authors@R: c(
+    person("Simon", "Alsén", email = "simal451@student.liu.se", role = c("cre")),
+    person("Mohamed", "Ali", email = "mohal954@student.liu.se", role = c("aut")))
+Description: Ridge regression is a method of estimating the coefficients of multiple-regression models in scenarios where independent variables are highly correlated
+License: CC0
 Encoding: UTF-8
 LazyData: true
-Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
+Depends:
+  dplyr,
+  plotly,
+  seriation,
+  nycflights13,
+  ggplot2,
+  gridExtra,
+VignetteBuilder: knitr
+URL: https://github.com/Elmahi92/smrid
+BugReports: https://github.com/Elmahi92/smrid/issues
+Suggests: 
+    testthat (>= 3.0.0),
+    knitr,
+    rmarkdown
+Config/testthat/edition: 3
