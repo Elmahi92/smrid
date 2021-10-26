@@ -36,7 +36,7 @@ ridgereg <- setRefClass(
         data_name = "character"
     ),
     methods = list(
-        initialize = function(data, formula, lambda) {
+        initialize = function(formula = as.formula , data = as.data.frame, lambda = 0) {
             X <- model.matrix(formula, data = data)
             y <- data[, all.vars(formula)[1]]
             # Scale X and y
@@ -181,5 +181,3 @@ ridgereg <- setRefClass(
     )
 )
 
-myFormula <- as.formula("mpg ~ disp + hp + drat + wt + qsec")
-reg_model <- ridgereg(mtcars, myFormula, 0.5)
