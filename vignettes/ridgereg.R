@@ -90,3 +90,20 @@ test <- df[ind1,]
 train <- df[-ind1,]
 ind2 <- createDataPartition(train$day, p = (80/95), list = TRUE)
 
+## ----step2_4, message=FALSE---------------------------------------------------
+ridge_mod <- train(arr_delay ~ day + hour + month + dep_time + sched_dep_time + dep_delay + sched_arr_time + distance +
+                     temp + dewp + humid + wind_dir + wind_speed + precip + pressure + visib +
+                     wind_dir_t_wind_speed + temp_t_humid + wind_speed_t_humid, 
+                   data = train, 
+                   method = rdg_reg,
+                   trControl = trainControl(method = "repeatedcv", repeats = 1,
+                                            index = ind2,
+                                            indexOut = list(c(1:nrow(train))[-unlist(ind2)]) ))
+
+ridge_mod$bestTune
+ridge_mod$results[,1:2]
+
+## ----step2_5, message=FALSE---------------------------------------------------
+ridge_pred <- predict(ridge_mod, test)
+RMSE(ridge_pred, test$arr_delay)
+
