@@ -4,9 +4,8 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 
-## ----setup, message=FALSE-----------------------------------------------------
-library(githubinstall)
-library(smlm)
+## ----setup, message=FALSE, warning=FALSE--------------------------------------
+library(smrid)
 library(caret)
 library(MASS)
 library(leaps)
@@ -62,4 +61,32 @@ ridge_pred <- predict(ridge_mod, test)
 RMSE(lm_pred, test$medv)
 RMSE(forward_pred, test$medv)
 RMSE(ridge_pred, test$medv)
+
+## ----step2_1, message=FALSE---------------------------------------------------
+library(nycflights13)
+library(tidyverse)
+library(caret)
+library(smlm)
+
+# Loading and merging the data sets flights and weather
+df_flights <- nycflights13::flights
+df_weather <- nycflights13::weather
+
+## ----step2_2, message=FALSE---------------------------------------------------
+df <- merge(df_flights, df_weather, 
+            by = c("time_hour", "origin", "day", "hour", "month", "year"), 
+            all.x = TRUE)
+
+df <- df[,-c(1,2,6,10,13,14,15,16,17,19,25)]
+df <- df[complete.cases(df),]
+
+df$wind_dir_t_wind_speed <- df$wind_dir * df$wind_speed
+df$temp_t_humid <- df$temp * df$humid
+df$wind_speed_t_humid <- df$wind_speed * df$humid
+
+## ----step2_3, message=FALSE---------------------------------------------------
+ind1 <- createDataPartition(df$day, p = 0.05, list = FALSE)
+test <- df[ind1,]
+train <- df[-ind1,]
+ind2 <- createDataPartition(train$day, p = (80/95), list = TRUE)
 
