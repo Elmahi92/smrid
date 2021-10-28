@@ -53,7 +53,7 @@ forward_mod <- train(medv ~ ., data = train, method = "leapForward")
 
 ```{r step3c, message=FALSE}
 rdg_reg <- list(type = "Regression",
-                library = "smlm",
+                library = "smrid",
                 loop = NULL)
 
 rdg_reg$parameters <- data.frame(parameter = c("lambda"),
@@ -106,7 +106,7 @@ The ridge regression model results in the lowest RMSE, and hence fits the test d
 library(nycflights13)
 library(tidyverse)
 library(caret)
-library(smlm)
+library(smrid)
 
 # Loading and merging the data sets flights and weather
 df_flights <- nycflights13::flights
