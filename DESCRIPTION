@@ -16,7 +16,6 @@ Depends:
   nycflights13,
   ggplot2,
   githubinstall,
-  smlm,
   gridExtra,
 VignetteBuilder: knitr
 URL: https://github.com/Elmahi92/smrid
